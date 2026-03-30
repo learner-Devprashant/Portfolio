@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: #F5F5F0;
+    color: #111111;
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: #F5F5F0; }
+  ::-webkit-scrollbar-thumb { background: #F5C518; border-radius: 4px; }
+}
+
+@layer utilities {
+  .font-bebas { font-family: 'Bebas Neue', sans-serif; }
+  .font-mont  { font-family: 'Montserrat', sans-serif; }
+
+  /* Vertical side label */
+  .writing-vertical {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+  }
+
+  /* Stroke text */
+  .text-stroke {
+    -webkit-text-stroke: 1px #ccc;
+    color: transparent;
+  }
+}
+
+/* ── GSAP will-change hints ── */
+.gsap-target { will-change: transform, opacity; }
+
+/* ── Pulse dot ── */
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.5); }
+}
+.pulse-dot { animation: pulseDot 2s ease-in-out infinite; }
+
+/* ── Float ── */
+@keyframes floatY {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50%       { transform: translateY(-14px) rotate(6deg); }
+}
+.float-anim { animation: floatY 6s ease-in-out infinite; }
+
+/* ── Marquee ── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 22s linear infinite;
+  display: flex;
+  white-space: nowrap;
+}
+
+/* ── Project card left bar ── */
+.proj-bar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: #F5C518;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.35s ease;
+}
+.proj-bar:hover::before { transform: scaleY(1); }
+
+/* ── Skill chip hover ── */
+.skill-chip {
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+.skill-chip:hover { transform: translateY(-2px); }
+
+/* ── TOC card ── */
+.toc-card {
+  transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+.toc-card:hover {
+  background: #F5C518 !important;
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.15);
+}
+.toc-card:hover .toc-icon { background: #111111 !important; }
+
+/* ── Preloader ── */
+#preloader {
+  position: fixed; inset: 0;
+  background: #111111;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9999;
+}
+.pre-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(60px, 12vw, 120px);
+  color: #F5C518;
+  letter-spacing: 4px;
+  overflow: hidden;
+}
