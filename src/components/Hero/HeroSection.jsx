@@ -6,7 +6,7 @@ import ArrowBtn from "../shared/ArrowBtn";
 /* ── Floating tech icon ── */
 const FloatIcon = memo(({ icon, style }) => (
   <span
-    className="absolute text-3xl opacity-[0.13] float-anim pointer-events-none"
+    className="absolute text-3xl opacity-[0.20] float-anim pointer-events-none"
     style={style}
   >
     {icon}
@@ -18,7 +18,7 @@ FloatIcon.displayName = "FloatIcon";
 const Ticker = memo(() => {
   const doubled = [...TICKER_ITEMS, ...TICKER_ITEMS];
   return (
-    <div className="overflow-hidden border-t border-[#ccc] pt-4 mt-8">
+    <div className=" overflow-hidden border-t border-[#a5a3a3] pt-4 mt-8">
       <div className="marquee-track gap-0">
         {doubled.map((item, i) => (
           <span
@@ -48,7 +48,7 @@ export default function HeroSection() {
   useEffect(() => {
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-    tl.from(quoteRef.current, { y: -30, opacity: 0, duration: 0.7 }, 0.1)
+    tl.from(quoteRef.current, { y: 30, opacity: 0, duration: 0.7 }, 0.1)
       .from(badgeRef.current, { x: -40, opacity: 0, duration: 0.6 }, 0.25)
       .from(title1Ref.current, { x: -50, opacity: 0, duration: 0.7 }, 0.35)
       .from(title2Ref.current, { x: -50, opacity: 0, duration: 0.7 }, 0.48)
@@ -62,7 +62,7 @@ export default function HeroSection() {
       className="relative min-h-screen bg-offwhite flex items-center px-20 py-16 overflow-hidden"
     >
       {/* Pulse dot top-left */}
-      <div className="absolute top-8 left-8 w-4 h-4 rounded-full bg-yellow pulse-dot z-10" />
+      <div className="absolute top-8 left-8 w-6 h-6 rounded-full bg-yellow pulse-dot z-10" />
 
       {/* Year label top-right */}
       <span className="absolute top-10 right-16 text-[11px] font-extrabold tracking-[2px] text-[#888] uppercase z-10">
@@ -99,7 +99,7 @@ export default function HeroSection() {
 
       {/* Grid */}
       <div
-        className="relative z-10 w-full max-w-[1100px] mx-auto grid gap-10"
+        className="relative  z-10 w-full max-w-[1100px] mx-auto grid gap-10"
         style={{ gridTemplateColumns: "1fr 340px", alignItems: "center" }}
       >
         {/* LEFT */}
@@ -107,8 +107,14 @@ export default function HeroSection() {
           {/* Big quote mark */}
           <span
             ref={quoteRef}
-            className="font-bebas text-yellow block"
-            style={{ fontSize: 120, lineHeight: 0.7, marginBottom: -10 }}
+            className="font-bebas relative text-yellow block"
+            style={{
+              fontSize: 120,
+              lineHeight: 0.7,
+              color: "#F5C518",
+              position: "relative",
+              marginBottom: -10,
+            }}
           >
             "
           </span>
@@ -116,7 +122,7 @@ export default function HeroSection() {
           {/* Badge */}
           <div
             ref={badgeRef}
-            className="inline-block bg-yellow px-3 py-1 text-[11px] font-extrabold tracking-[2px] uppercase mb-2"
+            className="inline-block bg-[yellow] px-3 py-1 text-[11px] font-extrabold tracking-[2px] uppercase mb-2"
           >
             MERN Stack Developer
           </div>
@@ -166,7 +172,7 @@ export default function HeroSection() {
           <div className="absolute top-5 left-0 bg-yellow px-3 py-1.5 text-[9px] font-extrabold tracking-[2px] uppercase">
             MERN Dev
           </div>
-          <div className="absolute top-16 right-0 text-right text-[9px] font-bold text-[#888] tracking-[1px] leading-relaxed">
+          <div className="absolute top-16 right-0 text-right text-[9px] font-bold text-[#100202] tracking-[1px] leading-relaxed">
             Selected Best
             <br />
             Full Stack Developer

@@ -1,8 +1,8 @@
 import { lazy, Suspense } from "react";
 import { useSelector } from "react-redux";
-import Preloader from "./components/ui/Preloader";
+import Preloader from "./components/UI/Preloader";
 import CursorBlob from "./components/ui/CursorBlob";
-import SideLabel from "./components/ui/SideLabel";
+import SideLabel from "./components/UI/SideLabel";
 
 // Lazy-loaded sections for code splitting
 const HeroSection = lazy(() => import("./components/Hero/HeroSection"));
