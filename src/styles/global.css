@@ -47,6 +47,17 @@
 }
 .pulse-dot { animation: pulseDot 2s ease-in-out infinite; }
 
+.float-anim {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* float animation */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
 /* ── Float ── */
 @keyframes floatY {
   0%, 100% { transform: translateY(0px) rotate(0deg); }

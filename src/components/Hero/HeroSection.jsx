@@ -1,12 +1,15 @@
+"use client";
+
 import { useEffect, useRef, memo } from "react";
+import { useSelector } from "react-redux";
 import { gsap } from "gsap";
 import { TICKER_ITEMS } from "../../utils/data";
 import ArrowBtn from "../shared/ArrowBtn";
 
-/* ── Floating tech icon ── */
+/* Floating icon */
 const FloatIcon = memo(({ icon, style }) => (
   <span
-    className="absolute text-3xl opacity-[0.20] float-anim pointer-events-none"
+    className="absolute text-3xl opacity-[0.2] float-anim pointer-events-none"
     style={style}
   >
     {icon}
@@ -14,11 +17,11 @@ const FloatIcon = memo(({ icon, style }) => (
 ));
 FloatIcon.displayName = "FloatIcon";
 
-/* ── Ticker strip ── */
+/* Ticker */
 const Ticker = memo(() => {
   const doubled = [...TICKER_ITEMS, ...TICKER_ITEMS];
   return (
-    <div className=" overflow-hidden border-t border-[#a5a3a3] pt-4 mt-8">
+    <div className="overflow-hidden border-t border-[#cccc] pt-4 mt-8">
       <div className="marquee-track gap-0">
         {doubled.map((item, i) => (
           <span
@@ -36,85 +39,122 @@ const Ticker = memo(() => {
 });
 Ticker.displayName = "Ticker";
 
-/* ── Main Hero ── */
 export default function HeroSection() {
+  const isLoaded = useSelector((state) => state.portfolio.preloaderDone);
+
   const quoteRef = useRef(null);
   const badgeRef = useRef(null);
-  const title1Ref = useRef(null);
-  const title2Ref = useRef(null);
+  const titleRef = useRef(null);
   const nameRowRef = useRef(null);
   const photoRef = useRef(null);
 
   useEffect(() => {
-    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    if (!isLoaded) return;
 
-    tl.from(quoteRef.current, { y: 30, opacity: 0, duration: 0.7 }, 0.1)
-      .from(badgeRef.current, { x: -40, opacity: 0, duration: 0.6 }, 0.25)
-      .from(title1Ref.current, { x: -50, opacity: 0, duration: 0.7 }, 0.35)
-      .from(title2Ref.current, { x: -50, opacity: 0, duration: 0.7 }, 0.48)
-      .from(nameRowRef.current, { y: 20, opacity: 0, duration: 0.6 }, 0.62)
-      .from(photoRef.current, { x: 50, opacity: 0, duration: 0.8 }, 0.4);
-  }, []);
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
+
+      gsap.set(
+        [
+          quoteRef.current,
+          badgeRef.current,
+          nameRowRef.current,
+          photoRef.current,
+        ],
+        { opacity: 0 },
+      );
+
+      const letters = titleRef.current.querySelectorAll("span span");
+      gsap.set(letters, { y: 120, opacity: 0 });
+
+      tl.delay(0.3)
+
+        // TOP
+        .fromTo(
+          quoteRef.current,
+          { y: -120, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6 },
+        )
+
+        // LEFT
+        .fromTo(
+          badgeRef.current,
+          { x: -150, opacity: 0 },
+          { x: 0, opacity: 1, duration: 0.5 },
+        )
+        .to(letters, {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.03,
+        })
+
+        // RIGHT
+        .fromTo(
+          photoRef.current,
+          { x: 180, opacity: 0 },
+          { x: 0, opacity: 1, duration: 0.8 },
+        )
+
+        // BOTTOM
+        .fromTo(
+          nameRowRef.current,
+          { y: 100, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6 },
+        );
+    });
+
+    return () => ctx.revert();
+  }, [isLoaded]);
+
+  const splitText = (text) =>
+    text.split("").map((char, i) => (
+      <span key={i} className="inline-block overflow-hidden">
+        <span className="inline-block">{char}</span>
+      </span>
+    ));
 
   return (
     <section
-      id="hero"
-      className="relative min-h-screen bg-[#ffffff73] flex items-center px-20 py-16 overflow-hidden"
+      className={`relative bg-offwhite min-h-screen flex items-center px-6 md:px-12 lg:px-20 py-16 overflow-hidden transition-opacity duration-700 ${
+        isLoaded ? "opacity-100" : "opacity-0"
+      }`}
     >
-      {/* Pulse dot top-left */}
-      <div className="absolute top-8 left-8 w-6 h-6 rounded-full bg-yellow pulse-dot z-10" />
+      {/* Pulse dot */}
+      <div className="absolute top-6 left-6 md:top-8 md:left-8 w-4 h-4 md:w-6 md:h-6 rounded-full bg-yellow pulse-dot z-10" />
 
-      {/* Year label top-right */}
-      <span className="absolute top-10 right-16 text-sm font-extrabold tracking-[2px] text-[#888] uppercase z-10">
+      {/* Top name */}
+      <span className="absolute top-6 right-6 md:top-10 md:right-16 text-xs md:text-sm font-extrabold tracking-[2px] text-[#888] uppercase z-10">
         Prashant Kumar
       </span>
 
       {/* Floating icons */}
       <div className="absolute inset-0 pointer-events-none z-[1]">
         {[
-          {
-            icon: "⚛️",
-            style: { top: "15%", left: "62%", animationDelay: "0s" },
-          },
-          {
-            icon: "🟢",
-            style: { top: "70%", left: "58%", animationDelay: "1s" },
-          },
-          {
-            icon: "🍃",
-            style: { top: "22%", left: "80%", animationDelay: "2s" },
-          },
-          {
-            icon: "🔷",
-            style: { top: "78%", left: "75%", animationDelay: "1.5s" },
-          },
-          {
-            icon: "⚡",
-            style: { top: "45%", left: "68%", animationDelay: "0.5s" },
-          },
+          { icon: "⚛️", style: { top: "18%", left: "60%" } },
+          { icon: "🌐", style: { top: "82%", left: "55%" } },
+          { icon: "🍃", style: { top: "16%", left: "78%" } },
+          { icon: "🔷", style: { top: "76%", left: "78%" } },
+          { icon: "⚡", style: { top: "45%", left: "66%" } },
+          { icon: "💻", style: { top: "35%", left: "42%" } },
+          { icon: "🧠", style: { top: "55%", left: "50%" } },
+          { icon: "🧩", style: { top: "8%", left: "68%" } },
+          { icon: "🚀", style: { top: "65%", left: "85%" } },
+          { icon: "🟢", style: { top: "30%", left: "82%" } },
         ].map((f, i) => (
           <FloatIcon key={i} {...f} />
         ))}
       </div>
 
       {/* Grid */}
-      <div
-        className="relative  z-10 w-full max-w-[1100px] mx-auto grid gap-10"
-        style={{ gridTemplateColumns: "1fr 340px", alignItems: "center" }}
-      >
+      <div className="relative z-10 w-full max-w-[1200px] mx-auto grid lg:grid-cols-2 gap-12 items-center">
         {/* LEFT */}
-        <div>
-          {/* Big quote mark */}
+        <div className="relative">
+          {/* Quote */}
           <span
             ref={quoteRef}
-            className="font-bebas relative text-yellow block"
-            style={{
-              fontSize: 120,
-              lineHeight: 0.7,
-              color: "#F5C518",
-              position: "relative",
-              marginBottom: -10,
-            }}
+            className="font-bebas text-yellow block leading-none"
+            style={{ fontSize: "clamp(80px, 10vw, 120px)" }}
           >
             "
           </span>
@@ -122,59 +162,61 @@ export default function HeroSection() {
           {/* Badge */}
           <div
             ref={badgeRef}
-            className="inline-block bg-yellow px-3 py-1 text-[11px] font-extrabold tracking-[2px] uppercase mb-2"
+            className="inline-block bg-yellow px-3 py-1 text-[10px] md:text-xs font-extrabold tracking-[2px] uppercase mb-2"
           >
             MERN Stack Developer
           </div>
 
-          {/* Big title */}
+          {/* Title */}
           <h1
+            ref={titleRef}
             className="font-bebas leading-[0.88] tracking-tight"
-            style={{ fontSize: "clamp(90px,12vw,160px)" }}
+            style={{ fontSize: "clamp(60px, 10vw, 160px)" }}
           >
-            <span ref={title1Ref} className="block">
-              PORT
-            </span>
-            <span ref={title2Ref} className="block">
-              FOLIO<span className="text-yellow">.</span>
+            <span className="block">{splitText("PORT")}</span>
+            <span className="block">
+              {splitText("FOLIO")}
+              <span className="text-yellow">.</span>
             </span>
           </h1>
 
           {/* Name row */}
-          <div ref={nameRowRef} className="flex items-center gap-5 mt-8">
+          <div
+            ref={nameRowRef}
+            className="flex items-center gap-4 md:gap-5 mt-6 md:mt-8"
+          >
             <ArrowBtn href="#about" />
-            <div className="flex flex-col gap-0.5">
-              <span className="text-sm font-bold text-dark">
-                Prashant Kumar
-              </span>
-              <span className="text-[10px] text-[#888] font-medium tracking-[0.5px]">
-                Full Stack Developer.
-              </span>
+            <div className="leading-tight">
+              <p className="text-sm md:text-base font-bold">Prashant Kumar</p>
+              <p className="text-[10px] md:text-xs text-gray-500">
+                {/* Full Stack Developer */}Specialist in FrontEnd Development.
+              </p>
             </div>
           </div>
 
-          {/* Ticker */}
           <Ticker />
         </div>
 
-        {/* RIGHT — photo */}
-        <div ref={photoRef} className="relative h-[480px]">
-          <div className="absolute bottom-0 right-0 w-[280px] h-[420px] bg-dark rounded-sm" />
-          <div
-            className="absolute bottom-5 right-5 w-[260px] h-[380px] rounded-sm overflow-hidden flex items-center justify-center border-[3px] border-yellow"
-            style={{ background: "linear-gradient(135deg,#1a1a1a,#333)" }}
-          >
-            <span
-              className="font-bebas text-yellow tracking-tighter opacity-40"
-              style={{ fontSize: 90 }}
-            >
-              AS
+        {/* RIGHT */}
+        <div
+          ref={photoRef}
+          className="relative h-[320px] md:h-[420px] lg:h-[480px] w-full flex justify-center lg:justify-end"
+        >
+          <div className="absolute bottom-0 right-0 w-[70%] md:w-[280px] h-[80%] md:h-[420px] bg-black rounded-sm" />
+
+          <div className="absolute bottom-4 md:bottom-5 right-4 md:right-5 w-[65%] md:w-[260px] h-[75%] md:h-[380px] border-[3px] border-yellow rounded-sm flex items-center justify-center">
+            <span className="font-bebas text-yellow opacity-40 text-[60px] md:text-[90px]">
+              PK
             </span>
           </div>
-          <div className="absolute top-5 left-0 bg-yellow px-3 py-1.5 text-[9px] font-extrabold tracking-[2px] uppercase">
+
+          {/* Tag */}
+          <div className="absolute top-4 left-0 bg-yellow px-2 md:px-3 py-1 text-[8px] md:text-[9px] font-extrabold tracking-[2px] uppercase">
             MERN Dev
           </div>
-          <div className="absolute top-16 right-0 text-right text-[9px] font-bold text-[#100202] tracking-[1px] leading-relaxed">
+
+          {/* Small text */}
+          <div className="absolute top-14 right-0 text-right text-[8px] md:text-[9px] font-bold text-[#100202] tracking-[1px] leading-relaxed">
             Selected Best
             <br />
             Full Stack Developer
