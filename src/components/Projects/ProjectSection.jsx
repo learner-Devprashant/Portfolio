@@ -1,58 +1,43 @@
-import { useRef, memo } from 'react'
-import { useStaggerReveal } from '../../hooks/useGSAP'
-import { PROJECTS } from '../../utils/data'
-import SectionHeader from '../shared/SectionHeader'
+import { useRef } from "react";
+import { PROJECTS } from "../../utils/data"; // <-- FIX THIS PATH
+import SectionHeader from "../shared/SectionHeader";
 
-const ProjectCard = memo(({ title, tags, desc }) => (
-  <div
-    data-stagger
-    className="proj-bar relative bg-[#1a1a1a] border border-[#2a2a2a] p-7 cursor-pointer overflow-hidden
-      transition-all duration-250 hover:-translate-y-1 hover:border-yellow group"
-  >
-    {/* Tags */}
-    <div className="flex gap-1.5 flex-wrap mb-4">
-      {tags.map(t => (
-        <span key={t} className="bg-yellow text-dark text-[8px] font-extrabold px-2 py-0.5 tracking-[1px] uppercase">
-          {t}
-        </span>
-      ))}
+function ProjectCard({ title, tags, desc }) {
+  return (
+    <div className="bg-[#1a1a1a] p-5 rounded-lg border border-gray-700">
+      <div className="flex gap-2 flex-wrap mb-2">
+        {tags.map((tag, i) => (
+          <span
+            key={i}
+            className="bg-yellow  text-black font-semibold px-2 py-1 text-xs"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+
+      <h3 className="text-white text-lg font-semibold">{title}</h3>
+      <p className="text-gray-400 text-sm mt-2">{desc}</p>
     </div>
-
-    {/* Title */}
-    <h3 className="font-bebas text-offwhite tracking-wide mb-2" style={{ fontSize: 22 }}>
-      {title}
-    </h3>
-
-    {/* Desc */}
-    <p className="text-[11px] text-[#888] leading-[1.7] mb-5">{desc}</p>
-
-    {/* Link */}
-    <a
-      href="#"
-      className="text-[10px] font-bold tracking-[2px] uppercase text-yellow flex items-center gap-1.5
-        transition-all duration-200 group-hover:gap-3 no-underline"
-    >
-      View Project →
-    </a>
-  </div>
-))
-ProjectCard.displayName = 'ProjectCard'
+  );
+}
 
 export default function ProjectsSection() {
-  const gridRef = useRef(null)
-  useStaggerReveal(gridRef, '[data-stagger]')
+  const gridRef = useRef(null);
+
+  console.log(PROJECTS); // 🔍 DEBUG
 
   return (
-    <section id="projects" className="bg-dark">
+    <section className="bg-black p-5">
       <SectionHeader label="Projects" light />
 
-      <div
-        ref={gridRef}
-        className="grid gap-5 px-20 py-8 pb-20"
-        style={{ gridTemplateColumns: 'repeat(3,1fr)' }}
-      >
-        {PROJECTS.map(p => <ProjectCard key={p.title} {...p} />)}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+        {PROJECTS && PROJECTS.length > 0 ? (
+          PROJECTS.map((p, i) => <ProjectCard key={i} {...p} />)
+        ) : (
+          <p className="text-white">No projects found</p>
+        )}
       </div>
     </section>
-  )
+  );
 }

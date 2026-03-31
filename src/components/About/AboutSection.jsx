@@ -223,7 +223,7 @@ export default function AboutSection() {
               {["in", "GH", "X"].map((s) => (
                 <div
                   key={s}
-                  className="w-7 h-7 bg-[#222] rounded-full flex items-center justify-center text-[11px]
+                  className="w-7 h-7 bg-[#222] rounded-full text-white flex items-center justify-center text-[11px]
                   transition-all duration-300 hover:bg-yellow hover:text-dark hover:scale-125 hover:-translate-y-1 cursor-pointer"
                 >
                   {s}
