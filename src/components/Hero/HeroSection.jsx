@@ -59,14 +59,14 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen bg-offwhite flex items-center px-20 py-16 overflow-hidden"
+      className="relative min-h-screen bg-[#ffffff73] flex items-center px-20 py-16 overflow-hidden"
     >
       {/* Pulse dot top-left */}
       <div className="absolute top-8 left-8 w-6 h-6 rounded-full bg-yellow pulse-dot z-10" />
 
       {/* Year label top-right */}
-      <span className="absolute top-10 right-16 text-[11px] font-extrabold tracking-[2px] text-[#888] uppercase z-10">
-        Ref / / / 2025
+      <span className="absolute top-10 right-16 text-sm font-extrabold tracking-[2px] text-[#888] uppercase z-10">
+        Prashant Kumar
       </span>
 
       {/* Floating icons */}
@@ -122,7 +122,7 @@ export default function HeroSection() {
           {/* Badge */}
           <div
             ref={badgeRef}
-            className="inline-block bg-[yellow] px-3 py-1 text-[11px] font-extrabold tracking-[2px] uppercase mb-2"
+            className="inline-block bg-yellow px-3 py-1 text-[11px] font-extrabold tracking-[2px] uppercase mb-2"
           >
             MERN Stack Developer
           </div>
@@ -144,9 +144,11 @@ export default function HeroSection() {
           <div ref={nameRowRef} className="flex items-center gap-5 mt-8">
             <ArrowBtn href="#about" />
             <div className="flex flex-col gap-0.5">
-              <span className="text-sm font-bold text-dark">Aryan Sharma</span>
+              <span className="text-sm font-bold text-dark">
+                Prashant Kumar
+              </span>
               <span className="text-[10px] text-[#888] font-medium tracking-[0.5px]">
-                Selected Best · Full Stack Developer 2025
+                Full Stack Developer.
               </span>
             </div>
           </div>

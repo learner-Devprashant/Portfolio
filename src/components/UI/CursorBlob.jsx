@@ -26,7 +26,7 @@ export default function CursorBlob() {
         height: 320,
         borderRadius: "50%",
         background:
-          "radial-gradient(circle, rgba(245,197,24,0.10) 0%, transparent 70%)",
+          "radial-gradient(circle, rgba(245,197,24,0.2) 0%, transparent 70%)",
         transform: "translate(-50%, -50%)",
       }}
     />
