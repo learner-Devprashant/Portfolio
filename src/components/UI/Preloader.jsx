@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { gsap } from "gsap";
 import { setPreloaderDone } from "../../store/portfolioSlice";
 
-export default function Preloader() {
+export default function PreLoader() {
   const el = useRef(null);
   const textRef = useRef(null);
   const dispatch = useDispatch();
