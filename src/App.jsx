@@ -1,17 +1,17 @@
 import { lazy, Suspense } from "react";
 import { useSelector } from "react-redux";
-import PreLoader from "./components/UI/Preloader";
-import CursorBlob from "./components/UI/CursorBlob";
-import SideLabel from "./components/UI/SideLabel";
+import PreLoader from "./src/components/UI/Preloader";
+import CursorBlob from "./src/components/UI/CursorBlob";
+import SideLabel from "./src/components/UI/SideLabel";
 
 // Lazy-loaded sections for code splitting
-const HeroSection = lazy(() => import("./components/Hero/HeroSection"));
-const AboutSection = lazy(() => import("./components/About/AboutSection"));
-const TOCSection = lazy(() => import("./components/TOC/TOCSection"));
+const HeroSection = lazy(() => import("./src/components/Hero/HeroSection"));
+const AboutSection = lazy(() => import("./src/components/About/AboutSection"));
+const TOCSection = lazy(() => import("./src/components/TOC/TOCSection"));
 const ProjectsSection = lazy(
-  () => import("./components/Projects/ProjectSection"),
+  () => import("./src/components/Projects/ProjectSection"),
 );
-const Footer = lazy(() => import("./components/Footer/FooterSection"));
+const Footer = lazy(() => import("./src/components/Footer/FooterSection"));
 
 const SectionFallback = () => (
   <div className="w-full h-40 flex items-center justify-center">
@@ -31,7 +31,7 @@ export default function App() {
       <CursorBlob />
 
       {/* Fixed side label */}
-      <SideLabel  />
+      <SideLabel />
 
       {/* Main content */}
       <main>
