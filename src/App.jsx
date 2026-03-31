@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 import { useSelector } from "react-redux";
-import PreLoader from "./components/UI/PreLoader";
+import Preloader from "./components/UI/Preloader";
 import CursorBlob from "./components/UI/CursorBlob";
 import SideLabel from "./components/UI/SideLabel";
 
@@ -25,7 +25,7 @@ export default function App() {
   return (
     <>
       {/* Preloader — always mounted until animation completes */}
-      {!preloaderDone && <PreLoader />}
+      {!preloaderDone && <Preloader />}
 
       {/* Cursor glow */}
       <CursorBlob />
