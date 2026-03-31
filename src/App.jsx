@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { useSelector } from "react-redux";
 import Preloader from "./components/UI/Preloader";
-import CursorBlob from "./components/ui/CursorBlob";
+import CursorBlob from "./components/UI/CursorBlob";
 import SideLabel from "./components/UI/SideLabel";
 
 // Lazy-loaded sections for code splitting
