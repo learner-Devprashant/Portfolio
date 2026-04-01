@@ -48,6 +48,11 @@ export default function HeroSection() {
   const nameRowRef = useRef(null);
   const photoRef = useRef(null);
 
+  // ✅ FORCE SCROLL TO TOP ON REFRESH
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   useEffect(() => {
     if (!isLoaded) return;
 
@@ -120,15 +125,12 @@ export default function HeroSection() {
         isLoaded ? "opacity-100" : "opacity-0"
       }`}
     >
-      {/* Pulse dot */}
       <div className="absolute top-6 left-6 md:top-8 md:left-8 w-4 h-4 md:w-6 md:h-6 rounded-full bg-yellow pulse-dot z-10" />
 
-      {/* Top name */}
       <span className="absolute top-6 right-6 md:top-10 md:right-16 text-xs md:text-sm font-extrabold tracking-[2px] text-[#888] uppercase z-10">
         Prashant Kumar
       </span>
 
-      {/* Floating icons */}
       <div className="absolute inset-0 pointer-events-none z-[1]">
         {[
           { icon: "⚛️", style: { top: "18%", left: "60%" } },
@@ -146,11 +148,8 @@ export default function HeroSection() {
         ))}
       </div>
 
-      {/* Grid */}
       <div className="relative z-10 w-full max-w-[1200px] mx-auto grid lg:grid-cols-2 gap-12 items-center">
-        {/* LEFT */}
         <div className="relative">
-          {/* Quote */}
           <span
             ref={quoteRef}
             className="font-bebas text-yellow block leading-none"
@@ -159,7 +158,6 @@ export default function HeroSection() {
             "
           </span>
 
-          {/* Badge */}
           <div
             ref={badgeRef}
             className="inline-block bg-yellow px-3 py-1 text-[10px] md:text-xs font-extrabold tracking-[2px] uppercase mb-2"
@@ -167,7 +165,6 @@ export default function HeroSection() {
             MERN Stack Developer
           </div>
 
-          {/* Title */}
           <h1
             ref={titleRef}
             className="font-bebas leading-[0.88] tracking-tight"
@@ -180,7 +177,6 @@ export default function HeroSection() {
             </span>
           </h1>
 
-          {/* Name row */}
           <div
             ref={nameRowRef}
             className="flex items-center gap-4 md:gap-5 mt-6 md:mt-8"
@@ -189,7 +185,7 @@ export default function HeroSection() {
             <div className="leading-tight">
               <p className="text-sm md:text-base font-bold">Prashant Kumar</p>
               <p className="text-[10px] md:text-xs text-gray-500">
-                {/* Full Stack Developer */}Specialist in FrontEnd Development.
+                Specialist in FrontEnd Development.
               </p>
             </div>
           </div>
@@ -197,7 +193,6 @@ export default function HeroSection() {
           <Ticker />
         </div>
 
-        {/* RIGHT */}
         <div
           ref={photoRef}
           className="relative h-[320px] md:h-[420px] lg:h-[480px] w-full flex justify-center lg:justify-end"
@@ -210,12 +205,10 @@ export default function HeroSection() {
             </span>
           </div>
 
-          {/* Tag */}
           <div className="absolute top-4 left-0 bg-yellow px-2 md:px-3 py-1 text-[8px] md:text-[9px] font-extrabold tracking-[2px] uppercase">
             MERN Dev
           </div>
 
-          {/* Small text */}
           <div className="absolute top-14 right-0 text-right text-[8px] md:text-[9px] font-bold text-[#100202] tracking-[1px] leading-relaxed">
             Selected Best
             <br />

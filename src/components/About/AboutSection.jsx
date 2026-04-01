@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, memo } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   SKILLS_PRIMARY,
   SKILLS_ALSO,
@@ -12,10 +13,12 @@ import SectionHeader from "../shared/SectionHeader";
 import { FaInstagram } from "react-icons/fa";
 import { MdEmail, MdPhone } from "react-icons/md";
 
+gsap.registerPlugin(ScrollTrigger);
+
 /* Skill Chip */
 const SkillChip = memo(({ label, yellow }) => (
   <span
-    className={`text-[9px] font-extrabold px-3 py-1 tracking-[1px] uppercase rounded-sm
+    className={`skill-chip text-[9px] font-extrabold px-3 py-1 tracking-[1px] uppercase rounded-sm
     transition-all duration-300 cursor-default
     ${
       yellow
@@ -60,8 +63,12 @@ export default function AboutSection() {
   const photoRef = useRef(null);
   const contactRef = useRef(null);
   const helloRef = useRef(null);
+  const headerRef = useRef(null);
 
-  /* Split HELLO text */
+  const skillsRef = useRef(null);
+  const alsoRef = useRef(null);
+
+  /* Split text */
   const splitText = (text) =>
     text.split("").map((char, i) => (
       <span key={i} className="inline-block overflow-hidden">
@@ -71,42 +78,107 @@ export default function AboutSection() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      /* SECTION ENTRY */
-      gsap.from(sectionRef.current, {
-        opacity: 0,
-        y: 80,
-        duration: 1,
-        ease: "expo.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-        },
-      });
+      /* HEADER */
+      const headerLetters = headerRef.current?.querySelectorAll("span span");
 
-      /* HELLO TEXT ANIMATION */
+      if (headerLetters) {
+        gsap.set(headerLetters, { x: -80, opacity: 0 });
+
+        gsap.to(headerLetters, {
+          x: 0,
+          opacity: 1,
+          stagger: 0.05,
+          duration: 0.6,
+          ease: "expo.out",
+          scrollTrigger: {
+            trigger: headerRef.current,
+            start: "top 80%",
+            toggleActions: "play reverse play reverse",
+          },
+        });
+      }
+
+      /* HELLO */
       const letters = helloRef.current.querySelectorAll("span span");
 
-      gsap.set(letters, { y: 100, opacity: 0 });
+      gsap.set(letters, { x: -100, opacity: 0 });
 
       gsap.to(letters, {
-        y: 0,
+        x: 0,
         opacity: 1,
         duration: 0.6,
-        stagger: 0.04,
+        stagger: 0.05,
         ease: "expo.out",
         scrollTrigger: {
           trigger: helloRef.current,
           start: "top 85%",
+          toggleActions: "play reverse play reverse",
         },
       });
 
-      /* FLOATING IMAGE */
+      gsap.to(helloRef.current, {
+        y: 5,
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+
+      /* BORDER */
+      gsap.utils.toArray(".section-title").forEach((el) => {
+        gsap.fromTo(
+          el,
+          { borderBottomWidth: "0px" },
+          {
+            borderBottomWidth: "3px",
+            duration: 0.5,
+            scrollTrigger: {
+              trigger: el,
+              start: "top 90%",
+              toggleActions: "play reverse play reverse",
+            },
+          },
+        );
+      });
+
+      /* SKILLS */
+      gsap.fromTo(
+        skillsRef.current.querySelectorAll(".skill-chip"),
+        { x: -60, opacity: 0 },
+        {
+          x: 0,
+          opacity: 1,
+          stagger: 0.05,
+          scrollTrigger: {
+            trigger: skillsRef.current,
+            start: "top 85%",
+            toggleActions: "play reverse play reverse",
+          },
+        },
+      );
+
+      /* ALSO KNOW */
+      gsap.fromTo(
+        alsoRef.current.querySelectorAll(".skill-chip"),
+        { x: -60, opacity: 0 },
+        {
+          x: 0,
+          opacity: 1,
+          stagger: 0.05,
+          scrollTrigger: {
+            trigger: alsoRef.current,
+            start: "top 85%",
+            toggleActions: "play reverse play reverse",
+          },
+        },
+      );
+
+      /* FLOAT IMAGE */
       gsap.to(photoRef.current, {
         y: 10,
         duration: 2,
         repeat: -1,
         yoyo: true,
-        ease: "sine.inOut",
       });
 
       /* CONTACT GLOW */
@@ -115,51 +187,18 @@ export default function AboutSection() {
         repeat: -1,
         yoyo: true,
         duration: 2,
-        ease: "sine.inOut",
-      });
-
-      /* HELLO FLOAT */
-      gsap.to(helloRef.current, {
-        y: 5,
-        duration: 2,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
       });
     });
 
     return () => ctx.revert();
   }, []);
 
-  /* 3D Tilt */
-  const handleTilt = (e, el) => {
-    const rect = el.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    const rotateX = (y / rect.height - 0.5) * -10;
-    const rotateY = (x / rect.width - 0.5) * 10;
-
-    gsap.to(el, {
-      rotateX,
-      rotateY,
-      transformPerspective: 500,
-      duration: 0.3,
-    });
-  };
-
-  const resetTilt = (el) => {
-    gsap.to(el, {
-      rotateX: 0,
-      rotateY: 0,
-      duration: 0.4,
-      ease: "power3.out",
-    });
-  };
-
   return (
-    <section id="about" ref={sectionRef}>
-      <SectionHeader label="About" id="about-header" />
+    <section id="about" ref={sectionRef} className="bg-[#f5f5f500]">
+      {/* HEADER */}
+      <div ref={headerRef}>
+        <SectionHeader label="About" id="about-header" />
+      </div>
 
       <div className="grid lg:grid-cols-[220px_1fr] gap-12 px-6 md:px-12 lg:px-20 py-10">
         {/* LEFT */}
@@ -167,8 +206,6 @@ export default function AboutSection() {
           {/* IMAGE */}
           <div
             ref={photoRef}
-            onMouseMove={(e) => handleTilt(e, photoRef.current)}
-            onMouseLeave={() => resetTilt(photoRef.current)}
             className="relative w-[190px] h-[230px] mx-auto lg:mx-0 rounded-sm flex items-center justify-center overflow-hidden border-2 border-dark
             transition-all duration-300 hover:scale-105 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)]"
             style={{ background: "linear-gradient(160deg,#222,#444)" }}
@@ -182,8 +219,7 @@ export default function AboutSection() {
           {/* CONTACT */}
           <div
             ref={contactRef}
-            className="mt-5 bg-dark p-4 rounded-sm transition-all duration-300
-            hover:scale-[1.03] hover:shadow-[0_10px_40px_rgba(0,0,0,0.4)]"
+            className="mt-5 bg-dark p-4 rounded-sm transition-all duration-300 hover:scale-[1.03]"
           >
             <h4 className="text-yellow text-[10px] font-extrabold mb-3">
               Let's Work Together
@@ -200,7 +236,7 @@ export default function AboutSection() {
               },
               {
                 icon: <FaInstagram />,
-                text: "learner-Devprashant",
+                text: "i.m._prashant._",
               },
             ].map(({ icon, text }) => (
               <div
@@ -217,7 +253,6 @@ export default function AboutSection() {
                 {text}
               </div>
             ))}
-
             {/* SOCIAL */}
             <div className="flex gap-2 mt-3">
               {["in", "GH", "X"].map((s) => (
@@ -235,7 +270,7 @@ export default function AboutSection() {
 
         {/* RIGHT */}
         <div>
-          {/* HELLO ANIMATION */}
+          {/* HELLO */}
           <div
             ref={helloRef}
             className="font-bebas flex items-center gap-2 mb-4 leading-none"
@@ -250,27 +285,41 @@ export default function AboutSection() {
           </div>
 
           {/* TEXT */}
-          <p className="text-[11.5px] leading-[1.85] text-[#333] max-w-[520px] mb-4">
+          <p className="text-[11.5px] leading-[1.85] text-[#333] max-w-[520px] mb-2">
             I'm <strong className="text-dark font-bold">Prashant Kumar</strong>,
             a self-taught MERN Stack Developer with over 1 year of experience
-            building scalable, full-stack web applications.
+            building scalable, full-stack web applications. I love crafting
+            digital products that don't just function well — they deliver
+            exceptional user experiences. From RESTful APIs to React interfaces,
+            I bring ideas to life.
           </p>
 
+          <p className="text-[11.5px] leading-[1.85] text-[#333] max-w-[520px] mb-2">
+            I also work with cloud services and DevOps practices to ensure my
+            apps are fast, secure, and always available. For me, development is
+            about connecting clean code with real-world solutions.
+          </p>
           <p className="text-[11.5px] leading-[1.85] text-[#333] max-w-[520px] mb-6">
-            I also work with cloud services and DevOps practices.
+            If you're looking for a passionate developer who can turn your
+            vision into reality, let's connect and build something amazing
+            together.
           </p>
 
           {/* GRID */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
-              <p className="font-bold mb-3">Education</p>
+              <p className="section-title font-bold mb-3 border-yellow border-b inline-block">
+                Education
+              </p>
               {EDUCATION.map((e) => (
                 <EduItem key={e.year} {...e} />
               ))}
             </div>
 
-            <div>
-              <p className="font-bold mb-3">Software Skills</p>
+            <div ref={skillsRef}>
+              <p className="section-title font-bold mb-3 border-yellow border-b inline-block">
+                Software Skills
+              </p>
               <div className="flex flex-wrap gap-2">
                 {SKILLS_PRIMARY.map((s, i) => (
                   <SkillChip key={s} label={s} yellow={i % 3 === 0} />
@@ -279,14 +328,18 @@ export default function AboutSection() {
             </div>
 
             <div>
-              <p className="font-bold mb-3">Working Experience</p>
+              <p className="section-title font-bold mb-3 border-yellow border-b inline-block">
+                Working Experience
+              </p>
               {EXPERIENCE.map((e) => (
                 <ExpItem key={e.role} {...e} />
               ))}
             </div>
 
-            <div>
-              <p className="font-bold mb-3">Also Know</p>
+            <div ref={alsoRef}>
+              <p className="section-title font-bold mb-3 border-yellow border-b inline-block">
+                Also Know
+              </p>
               <div className="flex flex-wrap gap-2">
                 {SKILLS_ALSO.map((s, i) => (
                   <SkillChip key={s} label={s} yellow={i % 2 === 0} />
