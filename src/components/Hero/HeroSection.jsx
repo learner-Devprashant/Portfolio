@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TICKER_ITEMS } from "../../utils/data";
-import ArrowBtn from "../shared/ArrowBtn";
+import ArrowBtn from "../Shared/ArrowBtn";
 
 gsap.registerPlugin(ScrollTrigger);
 
