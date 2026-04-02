@@ -9,7 +9,7 @@ import {
   EXPERIENCE,
   EDUCATION,
 } from "../../utils/data";
-import SectionHeader from "../shared/SectionHeader";
+import SectionHeader from "../Shared/SectionHeader";
 import { FaInstagram } from "react-icons/fa";
 import { MdEmail, MdPhone } from "react-icons/md";
 

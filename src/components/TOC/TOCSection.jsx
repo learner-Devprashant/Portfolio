@@ -4,7 +4,7 @@ import { useRef, useEffect, memo } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TOC_CARDS } from "../../utils/data";
-import SectionHeader from "../shared/SectionHeader";
+import SectionHeader from "../Shared/SectionHeader";
 
 gsap.registerPlugin(ScrollTrigger);
 
