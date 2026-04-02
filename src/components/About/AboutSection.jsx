@@ -19,7 +19,7 @@ gsap.registerPlugin(ScrollTrigger);
 const SkillChip = memo(({ label, yellow }) => (
   <span
     className={`skill-chip text-[9px] font-extrabold px-3 py-1 tracking-[1px] uppercase rounded-sm
-    transition-all duration-300 cursor-default
+transition-all duration-300 cursor-default
     ${
       yellow
         ? "bg-yellow text-dark hover:bg-dark hover:text-yellow hover:scale-110"
@@ -245,7 +245,7 @@ export default function AboutSection() {
                 transition-all duration-300 hover:translate-x-2 hover:text-yellow"
               >
                 <div
-                  className="w-5 h-5 bg-yellow rounded-sm flex items-center justify-center text-dark
+                  className="w-5 h-5 bg-yellow  rounded-sm flex items-center justify-center text-red-700
                 transition-all duration-300 hover:scale-110"
                 >
                   {icon}
