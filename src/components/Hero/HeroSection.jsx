@@ -3,8 +3,11 @@
 import { useEffect, useRef, memo } from "react";
 import { useSelector } from "react-redux";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TICKER_ITEMS } from "../../utils/data";
 import ArrowBtn from "../shared/ArrowBtn";
+
+gsap.registerPlugin(ScrollTrigger);
 
 /* Floating icon */
 const FloatIcon = memo(({ icon, style }) => (
@@ -42,13 +45,14 @@ Ticker.displayName = "Ticker";
 export default function HeroSection() {
   const isLoaded = useSelector((state) => state.portfolio.preloaderDone);
 
+  const sectionRef = useRef(null);
   const quoteRef = useRef(null);
   const badgeRef = useRef(null);
   const titleRef = useRef(null);
   const nameRowRef = useRef(null);
   const photoRef = useRef(null);
 
-  // ✅ FORCE SCROLL TO TOP ON REFRESH
+  // scroll top on refresh
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -57,8 +61,9 @@ export default function HeroSection() {
     if (!isLoaded) return;
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
+      const letters = titleRef.current.querySelectorAll("span span");
 
+      // initial state
       gsap.set(
         [
           quoteRef.current,
@@ -69,11 +74,19 @@ export default function HeroSection() {
         { opacity: 0 },
       );
 
-      const letters = titleRef.current.querySelectorAll("span span");
       gsap.set(letters, { y: 120, opacity: 0 });
 
-      tl.delay(0.3)
+      const tl = gsap.timeline({
+        defaults: { ease: "expo.out" },
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 75%",
+          end: "bottom 20%",
+          toggleActions: "play reverse play reverse",
+        },
+      });
 
+      tl
         // TOP
         .fromTo(
           quoteRef.current,
@@ -87,6 +100,8 @@ export default function HeroSection() {
           { x: -150, opacity: 0 },
           { x: 0, opacity: 1, duration: 0.5 },
         )
+
+        // TEXT
         .to(letters, {
           y: 0,
           opacity: 1,
@@ -121,6 +136,7 @@ export default function HeroSection() {
 
   return (
     <section
+      ref={sectionRef}
       className={`relative bg-offwhite min-h-screen flex items-center px-6 md:px-12 lg:px-20 py-16 overflow-hidden transition-opacity duration-700 ${
         isLoaded ? "opacity-100" : "opacity-0"
       }`}
