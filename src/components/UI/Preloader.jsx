@@ -15,22 +15,25 @@ export default function PreLoader() {
       },
     });
 
-    // Reveal text chars
+    // Initial fade
     tl.from(textRef.current, {
       opacity: 0.5,
       duration: 0.6,
       ease: "power4.out",
     })
+
+      // Responsive letter spacing animation
       .to(
         textRef.current,
         {
-          letterSpacing: "40px",
+          letterSpacing: "clamp(10px, 6vw, 40px)",
           duration: 0.5,
           ease: "power2.inOut",
         },
         "+=0.2",
       )
-      // Slide entire preloader up
+
+      // Slide up animation
       .to(
         el.current,
         {
@@ -47,11 +50,15 @@ export default function PreLoader() {
       ref={el}
       className="fixed inset-0 bg-dark flex items-center justify-center z-[9999] overflow-hidden"
     >
-      <div className="overflow-hidden">
+      <div className="overflow-hidden w-full flex justify-center">
         <p
           ref={textRef}
-          className="font-bebas text-yellow"
-          style={{ fontSize: "clamp(80px,18vw,120px)", letterSpacing: "4px" }}
+          className="font-bebas text-yellow text-center"
+          style={{
+            fontSize: "clamp(40px, 12vw, 120px)",
+            letterSpacing: "clamp(2px, 1.5vw, 10px)",
+            lineHeight: "1",
+          }}
         >
           PORTFOLIO
         </p>
