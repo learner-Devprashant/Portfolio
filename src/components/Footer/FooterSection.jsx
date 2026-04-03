@@ -57,6 +57,7 @@ const Footer = memo(() => {
       ref={sectionRef}
       className="
         bg-yellow
+        fint-syne text-dark
         px-4 sm:px-8 md:px-16 lg:px-20
         py-4 sm:py-5
         flex flex-col md:flex-row
