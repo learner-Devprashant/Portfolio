@@ -10,10 +10,13 @@ export default {
         cardBg: "#EFEFEA",
       },
       fontFamily: {
-        bebas: ['"Bebas Neue"', "sans-serif"],
+        bebas: ['"Bebas Neue"', "sans-serif", "Big Shoulders Display"],
         montserrat: ["Montserrat", "sans-serif"],
+        syne: ["Syne", "sans-serif"],
       },
     },
   },
   plugins: [],
 };
+
+// tailwind.config.js  →  theme.extend.fontFamily:
