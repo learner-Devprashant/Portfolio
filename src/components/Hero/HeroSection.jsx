@@ -213,24 +213,16 @@ export default function HeroSection() {
           ref={photoRef}
           className="relative h-[320px] md:h-[420px] lg:h-[480px] w-full flex justify-center lg:justify-end"
         >
-          <div className="absolute bottom-0 right-0 w-[70%] md:w-[280px] h-[80%] md:h-[420px] bg-black rounded-sm" />
+          <div className="absolute bottom-0 right-0 w-[70%] md:w-[280px] h-[80%] md:h-[420px]  bg-black rounded-sm" />
 
           <div className="absolute bottom-4 md:bottom-5 right-4 md:right-5 w-[65%] md:w-[260px] h-[75%] md:h-[380px] border-[3px] border-yellow rounded-sm flex items-center justify-center">
-            <span className="font-bebas text-yellow opacity-40 text-[60px] md:text-[90px]">
+            <span className="font-bebas text-yellow text-[60px] md:text-[90px]">
               PK
             </span>
           </div>
 
           <div className="absolute top-4 left-0 bg-yellow px-2 md:px-3 py-1 text-[8px] md:text-[9px] font-extrabold tracking-[2px] uppercase">
             MERN Dev
-          </div>
-
-          <div className="absolute top-14 right-0 text-right text-[8px] md:text-[9px] font-bold text-[#100202] tracking-[1px] leading-relaxed">
-            Selected Best
-            <br />
-            Full Stack Developer
-            <br />
-            2025
           </div>
         </div>
       </div>

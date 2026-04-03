@@ -206,22 +206,46 @@ export default function AboutSection() {
           {/* IMAGE */}
           <div
             ref={photoRef}
-            className="relative w-[190px] h-[230px] mx-auto lg:mx-0 rounded-sm flex items-center justify-center overflow-hidden border-2 border-dark
-            transition-all duration-300 hover:scale-105 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)]"
-            style={{ background: "linear-gradient(160deg,#222,#444)" }}
+            className="relative w-[180px] sm:w-[200px] md:w-[220px] 
+    aspect-[3/4] mx-auto lg:mx-0 group"
           >
-            <span className="font-bebas text-yellow opacity-50 text-[60px]">
-              PK
-            </span>
-            <div className="absolute bottom-0 left-0 right-0 h-16 bg-yellow opacity-[0.15]" />
+            {/* Image */}
+            <img
+              src="./photo1.png"
+              alt="Prashant Kumar"
+              className="w-full h-full object-cover rounded-md 
+      transition-all duration-500 ease-out
+      group-hover:scale-[1.05] group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.35),0_0_30px_rgba(255,180,80,0.4)]"
+            />
+
+            {/* 🔥 BORDER (RIGHT) */}
+            <span
+              className="absolute bottom-[4px] right-[4px] 
+      w-[3px] h-0 bg-black 
+      transition-all duration-500 ease-out
+      group-hover:h-[calc(100%-8px)]"
+            />
+
+            {/* 🔥 BORDER (BOTTOM) */}
+            <span
+              className="absolute bottom-[4px] right-[4px] 
+      h-[3px] w-0 bg-black 
+      transition-all duration-500 ease-out
+      group-hover:w-[calc(100%-8px)]"
+            />
+
+            {/* subtle overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-60 rounded-md" />
           </div>
 
           {/* CONTACT */}
           <div
             ref={contactRef}
-            className="mt-5 bg-dark p-4 rounded-sm transition-all duration-300 hover:scale-[1.03]"
+            className="mt-6 bg-dark p-4 rounded-md 
+    transition-all duration-500 ease-out
+    hover:scale-[1.03] hover:shadow-[0_15px_40px_rgba(0,0,0,0.4)]"
           >
-            <h4 className="text-yellow text-[10px] font-extrabold mb-3">
+            <h4 className="text-yellow text-[10px] font-extrabold mb-3 tracking-wider">
               Let's Work Together
             </h4>
 
@@ -242,24 +266,30 @@ export default function AboutSection() {
               <div
                 key={text}
                 className="flex items-center gap-2 mb-2 text-offwhite text-[9px]
-                transition-all duration-300 hover:translate-x-2 hover:text-yellow"
+        transition-all duration-300 ease-out
+        hover:translate-x-2 hover:text-yellow group/item"
               >
                 <div
-                  className="w-5 h-5 bg-yellow  rounded-sm flex items-center justify-center text-red-700
-                transition-all duration-300 hover:scale-110"
+                  className="w-5 h-5 bg-yellow rounded-sm flex items-center justify-center text-red-700
+          transition-all duration-300
+          group-hover/item:scale-110 group-hover/item:rotate-6"
                 >
                   {icon}
                 </div>
-                {text}
+                <span className="transition-all duration-300 group-hover/item:tracking-wide">
+                  {text}
+                </span>
               </div>
             ))}
+
             {/* SOCIAL */}
-            <div className="flex gap-2 mt-3">
+            <div className="flex gap-2 mt-4">
               {["in", "GH", "X"].map((s) => (
                 <div
                   key={s}
-                  className="w-7 h-7 bg-[#222] rounded-full text-white flex items-center justify-center text-[11px]
-                  transition-all duration-300 hover:bg-yellow hover:text-dark hover:scale-125 hover:-translate-y-1 cursor-pointer"
+                  className="w-8 h-8 bg-[#222] rounded-full text-white flex items-center justify-center text-[11px]
+          transition-all duration-300 ease-out
+          hover:bg-yellow hover:text-dark hover:scale-125 hover:-translate-y-1 hover:shadow-lg cursor-pointer"
                 >
                   {s}
                 </div>

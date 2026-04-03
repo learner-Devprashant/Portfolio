@@ -51,6 +51,19 @@
   animation: float 6s ease-in-out infinite;
 }
 
+.perspective {
+  perspective: 1200px;
+}
+
+@keyframes floatSmooth {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: floatSmooth 4s ease-in-out infinite;
+}
+
 /* float animation */
 @keyframes float {
   0% { transform: translateY(0px); }
