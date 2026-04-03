@@ -69,7 +69,7 @@ const Footer = memo(() => {
       <span
         ref={nameRef}
         className="
-          font-bebas text-dark tracking-[2px]
+          font-montserrat text-dark tracking-[2px]
           text-[28px] sm:text-[34px] md:text-[40px]
           text-center md:text-left
         "
@@ -78,15 +78,7 @@ const Footer = memo(() => {
       </span>
 
       {/* 🔹 INFO */}
-      <div
-        ref={infoRef}
-        className="
-          text-center md:text-right
-          text-[11px] sm:text-[12px] md:text-[13px]
-          font-semibold text-dark opacity-80
-          leading-relaxed
-        "
-      >
+      <div className="text-center md:text-right text-[11px] sm:text-[12px] md:text-[13px] font-syne font-semibold text-dark opacity-80 leading-relaxed">
         MERN Stack Developer
         <br />
         Available for Freelance &amp; Full-time

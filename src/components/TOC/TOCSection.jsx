@@ -121,13 +121,13 @@ export default function TOCSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="overflow-hidden">
+    <section ref={sectionRef} className=" font-syne overflow-hidden">
       <SectionHeader label="Table Of Content" />
 
       <div className="relative px-4 sm:px-6 md:px-12 lg:px-20 pt-10 md:pt-12 pb-8">
         <div
           ref={bgTextRef}
-          className="font-bebas text-stroke absolute top-6 md:top-8 left-4 sm:left-6 md:left-12 whitespace-nowrap opacity-40 select-none pointer-events-none"
+          className=" text-stroke absolute top-6 md:top-8 left-4 sm:left-6 md:left-12 whitespace-nowrap opacity-40 select-none pointer-events-none"
           style={{
             fontSize: "clamp(48px, 12vw, 110px)",
             letterSpacing: "-2px",
@@ -138,7 +138,7 @@ export default function TOCSection() {
 
         <div
           ref={mainTextRef}
-          className="font-bebas relative z-10 flex flex-wrap items-center gap-2 sm:gap-3 md:gap-4"
+          className=" relative z-10 flex flex-wrap items-center gap-2 sm:gap-3 md:gap-4"
           style={{ fontSize: "clamp(28px, 8vw, 80px)" }}
         >
           <span className="text-yellow">"</span>

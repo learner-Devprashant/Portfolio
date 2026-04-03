@@ -29,7 +29,7 @@ const ProjectCard = memo(({ title, tags, desc }) => {
         {tags.map((tag, i) => (
           <span
             key={i}
-            className="bg-yellow text-black text-[9px] sm:text-[10px] font-extrabold tracking-[1px] px-2 sm:px-3 py-1 uppercase"
+            className="font-montserrat bg-yellow text-black text-[9px] sm:text-[10px] font-extrabold tracking-[1px] px-2 sm:px-3 py-1 uppercase"
           >
             {tag}
           </span>
@@ -38,7 +38,7 @@ const ProjectCard = memo(({ title, tags, desc }) => {
 
       {/* TITLE */}
       <h3
-        className="text-white font-extrabold uppercase 
+        className="text-white font-semibold uppercase 
       text-[16px] sm:text-[18px] md:text-[20px] leading-snug"
       >
         {title}
@@ -46,7 +46,7 @@ const ProjectCard = memo(({ title, tags, desc }) => {
 
       {/* DESC */}
       <p
-        className="text-gray-400 
+        className="text-gray-400 font-syne 
       text-[11px] sm:text-[12px] md:text-[13px] 
       leading-[1.7] mt-2"
       >
@@ -55,7 +55,7 @@ const ProjectCard = memo(({ title, tags, desc }) => {
 
       {/* BUTTON */}
       <span
-        className="mt-3 text-yellow 
+        className="mt-3 text-yellow font-syne 
         text-[10px] sm:text-[11px] md:text-[12px]
         font-extrabold tracking-[2px] uppercase
         flex items-center gap-2 transition-all duration-300 group-hover:gap-3"
@@ -76,7 +76,7 @@ export default function ProjectsSection() {
   /* 🔹 SPLIT TEXT */
   const splitText = (text) =>
     text.split("").map((char, i) => (
-      <span key={i} className="inline-block overflow-hidden">
+      <span key={i} className="font-syne inline-block overflow-hidden">
         <span className="inline-block">{char === " " ? "\u00A0" : char}</span>
       </span>
     ));
@@ -149,7 +149,7 @@ export default function ProjectsSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-black overflow-hidden">
+    <section ref={sectionRef} className="font-syne bg-black overflow-hidden">
       <SectionHeader label="Projects" light />
 
       {/* 🔥 TITLE */}

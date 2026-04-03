@@ -18,7 +18,7 @@ gsap.registerPlugin(ScrollTrigger);
 /* Skill Chip */
 const SkillChip = memo(({ label, yellow }) => (
   <span
-    className={`skill-chip text-[9px] font-extrabold px-3 py-1 tracking-[1px] uppercase rounded-sm
+    className={`font-montserrat skill-chip text-[9px] font-extrabold px-3 py-1 tracking-[1px] uppercase rounded-sm
 transition-all duration-300 cursor-default
     ${
       yellow
@@ -33,20 +33,20 @@ transition-all duration-300 cursor-default
 /* Experience */
 const ExpItem = memo(({ role, company, period }) => (
   <div className="border-l-2 border-yellow pl-3 mb-4 hover:translate-x-1 transition-all duration-300">
-    <p className="text-[11px] font-bold">{role}</p>
-    <p className="text-[10px] text-[#888] mb-0.5">{company}</p>
-    <p className="text-[9px] text-[#888]">{period}</p>
+    <p className="font-syne text-[11px] font-bold">{role}</p>
+    <p className=" font-syne text-[10px] text-[#888] mb-0.5">{company}</p>
+    <p className="font-syne text-[9px] text-[#888]">{period}</p>
   </div>
 ));
 
 /* Education */
 const EduItem = memo(({ year, title, school, sub }) => (
-  <div className="mb-4 hover:translate-x-1 transition-all duration-300">
+  <div className="font-montserrat mb-4 hover:translate-x-1 transition-all duration-300">
     <span className="inline-block bg-yellow text-[9px] font-extrabold px-2 py-0.5 mb-1">
       {year}
     </span>
-    <p className="text-[11px] font-bold">{title}</p>
-    <p className="text-[10px] text-[#888]">
+    <p className="font-syne text-[11px] font-bold">{title}</p>
+    <p className="font-syne text-[10px] text-[#888]">
       {school}
       {sub && (
         <>
@@ -194,7 +194,7 @@ export default function AboutSection() {
   }, []);
 
   return (
-    <section id="about" ref={sectionRef} className="bg-[#f5f5f500]">
+    <section id="about" ref={sectionRef} className="font-syne bg-[#f5f5f500]">
       {/* HEADER */}
       <div ref={headerRef}>
         <SectionHeader label="About" id="about-header" />
@@ -308,7 +308,7 @@ export default function AboutSection() {
           >
             <span className="text-yellow text-[70px] md:text-[80px]">"</span>
 
-            <span className="flex">
+            <span className="flex font-syne">
               {splitText("HELLO")}
               <span className="text-yellow">{splitText(".")}</span>
             </span>

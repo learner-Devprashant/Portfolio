@@ -1,23 +1,5 @@
 "use client";
 
-/**
- * ─── FONT SETUP (one-time) ───────────────────────────────────────
- *
- * 1. globals.css  — add at the very top:
-//  *    @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Syne:wght@400;600;700;800&display=swap');
- *
- * 2. tailwind.config.js  →  theme.extend.fontFamily:
- *    bebas: ['"Big Shoulders Display"', 'sans-serif'],
- *    syne:  ['Syne', 'sans-serif'],
- *
- * "Big Shoulders Display" is a tighter, more editorial condensed
- * display font that replaces Bebas Neue while keeping the same
- * bold, punchy impact.
- * "Syne" (geometric grotesque) replaces the default sans for badges,
- * name, and body copy.
- * ────────────────────────────────────────────────────────────────
- */
-
 import { useEffect, useRef, memo } from "react";
 import { useSelector } from "react-redux";
 import { gsap } from "gsap";
@@ -47,7 +29,7 @@ const Ticker = memo(() => {
         {doubled.map((item, i) => (
           <span
             key={i}
-            className={`font-bebas text-base md:text-lg tracking-widest mr-5 ${
+            className={`font-syne text-base md:text-lg tracking-widest mr-5 ${
               item === "●" ? "text-yellow" : "text-dark/30"
             }`}
           >
@@ -219,7 +201,7 @@ export default function HeroSection() {
           {/* Main title */}
           <h1
             ref={titleRef}
-            className="font-bebas leading-[0.86] tracking-tight"
+            className="font-syne leading-[0.86] tracking-tight"
             style={{ fontSize: "clamp(52px, 9.5vw, 155px)" }}
           >
             <span className="block">{splitText("PORT")}</span>
@@ -249,12 +231,7 @@ export default function HeroSection() {
         </div>
 
         {/* ── RIGHT IMAGE ──────────────────────────── */}
-        {/*
-          KEY FIX: The yellow shadow div is now a sibling of the image card
-          inside a single `inline-block` wrapper, offset with absolute
-          positioning relative to that wrapper — so it is ALWAYS exactly
-          aligned with the image regardless of screen width.
-        */}
+
         <div
           ref={photoRef}
           className="
