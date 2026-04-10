@@ -41,7 +41,7 @@ const TOCCard = memo(({ icon, label, target }) => {
       onClick={() =>
         document.getElementById(target)?.scrollIntoView({ behavior: "smooth" })
       }
-      className="group relative border border-[#ddd] p-4 sm:p-5 md:p-6 lg:p-8 flex flex-col items-center gap-3 sm:gap-4 cursor-pointer overflow-hidden transition-all duration-300 bg-white hover:bg-yellow hover:shadow-[0_15px_40px_rgba(0,0,0,0.15)]"
+      className="group relative border border-[#ddd] p-4 sm:p-5 md:p-6 lg:p-8 flex flex-col items-center gap-3 sm:gap-4 cursor-pointer overflow-hidden transition-all duration-300 bg-offwhite hover:bg-yellow hover:shadow-[0_15px_40px_rgba(0,0,0,0.15)]"
     >
       <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-yellow flex items-center justify-center text-xl sm:text-2xl md:text-3xl transition-all duration-300 group-hover:scale-125 group-hover:rotate-6">
         {icon}
@@ -152,7 +152,9 @@ export default function TOCSection() {
 
       <div
         className="grid px-6 md:px-12 lg:px-20 pb-20 gap-4 md:gap-6"
-        style={{ gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))" }}
+        style={{
+          gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
+        }}
       >
         {TOC_CARDS.map((c, i) => (
           <div key={c.label} ref={(el) => (cardsRef.current[i] = el)}>
