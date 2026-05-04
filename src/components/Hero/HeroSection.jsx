@@ -277,7 +277,7 @@ export default function HeroSection() {
               />
 
               <img
-                src="./mainImage.png"
+                src="./image 2.png"
                 alt="Prashant Kumar — profile"
                 className="
                   w-full h-full object-cover object-top
