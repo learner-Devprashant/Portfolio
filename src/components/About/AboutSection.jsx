@@ -253,21 +253,27 @@ export default function AboutSection() {
               {
                 icon: <MdEmail />,
                 text: "prashanttkumar12@gmail.com",
+                link: "mailto:prashanttkumar12@gmail.com",
               },
               {
                 icon: <MdPhone />,
                 text: "+91 7617552493",
+                link: "tel:+917617552493",
               },
               {
                 icon: <FaInstagram />,
                 text: "i.m._prashant._",
+                link: "https://www.instagram.com/i.m._prashant._",
               },
-            ].map(({ icon, text }) => (
-              <div
+            ].map(({ icon, text, link }) => (
+              <a
                 key={text}
+                href={link}
+                target="_blank"
+                rel="noreferrer"
                 className="flex items-center gap-2 mb-2 text-offwhite text-[9px]
-        transition-all duration-300 ease-out
-        hover:translate-x-2 hover:text-yellow group/item"
+    transition-all duration-300 ease-out
+    hover:translate-x-2 hover:text-yellow group/item"
               >
                 <div
                   className="w-5 h-5 bg-yellow rounded-sm flex items-center justify-center text-red-700
@@ -279,20 +285,20 @@ export default function AboutSection() {
                 <span className="transition-all duration-300 group-hover/item:tracking-wide">
                   {text}
                 </span>
-              </div>
+              </a>
             ))}
 
             {/* SOCIAL */}
             <div className="flex gap-2 mt-4">
               {["in", "GH", "X"].map((s) => (
-                <div
+                <a
                   key={s}
                   className="w-8 h-8 bg-[#222] rounded-full text-white flex items-center justify-center text-[11px]
           transition-all duration-300 ease-out
           hover:bg-yellow hover:text-dark hover:scale-125 hover:-translate-y-1 hover:shadow-lg cursor-pointer"
                 >
                   {s}
-                </div>
+                </a>
               ))}
             </div>
           </div>
