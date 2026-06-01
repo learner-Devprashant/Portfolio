@@ -149,7 +149,12 @@ export default function ProjectsSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="font-syne bg-black overflow-hidden">
+    <section
+      id="project"
+      ref={sectionRef}
+      className="font-syne bg-black overflow-hidden"
+    >
+
       <SectionHeader label="Projects" light />
 
       {/* 🔥 TITLE */}
@@ -178,7 +183,6 @@ export default function ProjectsSection() {
           <span className="flex">{splitText("PROJECTS.")}</span>
         </div>
       </div>
-
       {/* 🔥 GRID */}
       <div
         className="grid px-4 sm:px-6 md:px-12 lg:px-20 pb-16 md:pb-20

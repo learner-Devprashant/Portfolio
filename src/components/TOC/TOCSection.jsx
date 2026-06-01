@@ -121,7 +121,7 @@ export default function TOCSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className=" font-syne overflow-hidden">
+    <section id="toc" ref={sectionRef} className=" font-syne overflow-hidden">
       <SectionHeader label="Table Of Content" />
 
       <div className="relative px-4 sm:px-6 md:px-12 lg:px-20 pt-10 md:pt-12 pb-8">
